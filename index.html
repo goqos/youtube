@@ -65,11 +65,10 @@
             outline: none;
         }
 
-        /* Glass Player Container Light Mode */
         .player-container {
             width: 100%;
             max-width: 400px;
-            height: 80vh;
+            height: 87vh;
             max-height: 780px;
             min-height: 600px;
             background: var(--card-bg);
@@ -85,7 +84,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Responsive Header and Setup Panel */
         .player-header {
             display: flex;
             flex-direction: column;
@@ -126,7 +124,6 @@
             transform: scale(1.05);
         }
 
-        /* Playlist Selector Container */
         .playlist-select-container {
             display: flex;
             background: rgba(0, 0, 0, 0.04);
@@ -150,7 +147,6 @@
             appearance: none;
         }
 
-        /* Custom Arrow for Select */
         .playlist-select-container::after {
             content: '\f078';
             font-family: 'Font Awesome 6 Free';
@@ -161,7 +157,6 @@
             margin-left: 8px;
         }
 
-        /* Video / Artwork Area */
         .artwork-area {
             flex: 1.2;
             display: flex;
@@ -170,10 +165,9 @@
             padding: 10px 24px;
         }
 
-        /* Modified Container to fit YouTube Video Player */
         .thumbnail-box {
             width: 100%;
-            aspect-ratio: 16 / 9; /* Video standard format */
+            aspect-ratio: 16 / 9;
             border-radius: 16px;
             overflow: hidden;
             background-color: #000; 
@@ -190,14 +184,12 @@
             border-color: #ff9800;
         }
 
-        /* Responsive Iframe Video */
         #yt-player {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        /* Track Metadata */
         .track-details {
             text-align: center;
             padding: 10px 28px;
@@ -222,7 +214,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Progress Bar */
         .progress-area {
             padding: 14px 28px;
         }
@@ -276,7 +267,6 @@
             font-weight: 500;
         }
 
-        /* Player Button Controls */
         .controls-area {
             display: flex;
             justify-content: space-between;
@@ -313,7 +303,6 @@
             transform: scale(0.9);
         }
 
-        /* Large Centered Play/Pause Button */
         .control-btn.play-pause-btn {
             width: 64px;
             height: 64px;
@@ -335,7 +324,6 @@
             transform: scale(0.95);
         }
 
-        /* Playlist Drawer Panel (Light) */
         .playlist-drawer {
             position: absolute;
             bottom: 0; 
@@ -431,8 +419,12 @@
             text-overflow: ellipsis;
             color: var(--text-main);
         }
-         img {pointer-events: none; 
-         cursor: default;}
+        
+        img {
+            pointer-events: none; 
+            cursor: default;
+        }
+        
         .playlist-item-duration {
             font-size: 0.75rem;
             color: var(--text-sub);
@@ -445,8 +437,7 @@
         <div class="player-header">
             <div class="header-top">
                 <div class="header-logo">
-                <a href="https://goqos.org"><img src="https://i.ibb.co/FL96K9Pw/20260519-131632.png" alt="goqos.org" width="150px"  border="0"></a>
-                
+                    <a href="https://goqos.org"><img src="https://i.ibb.co/FL96K9Pw/20260519-131632.png" alt="goqos.org" width="150px" border="0"></a>
                 </div>
                 <i class="fa-solid fa-bars" id="menu-btn" title="Open Playlist"></i>
             </div>
@@ -462,7 +453,6 @@
             </div>
         </div>
         
-       <!-- Video Player Container (Replaced Old Thumbnail Setup) -->
         <div class="artwork-area">
             <div class="thumbnail-box" id="thumbnail-container">
                 <div id="yt-player"></div>
@@ -494,7 +484,7 @@
 
         <div class="playlist-drawer" id="playlist-drawer">
             <div class="playlist-header">
-                <span> Video's</span>
+                <span> Videos</span>
                 <i class="fa-solid fa-xmark" id="close-drawer-btn" title="Close Drawer"></i>
             </div>
             <div id="playlist-items-container">
@@ -506,7 +496,6 @@
     </div>
 
     <script>
-        // Set default playlist ID from the first select option
         const playlistSelector = document.getElementById('playlist-selector');
         let currentPlaylistId = playlistSelector.value; 
 
@@ -517,6 +506,9 @@
         let isShuffle = false;
         let isRepeat = false;
         let progressInterval;
+        
+        // Anti-overlapping fix pointer
+        let currentPlaylistSequenceId = 0;
 
         // Elements
         const playBtn = document.getElementById('play-btn');
@@ -538,11 +530,9 @@
         const closeDrawerBtn = document.getElementById('close-drawer-btn');
         const playlistDrawer = document.getElementById('playlist-drawer');
 
-        // Drawer Event Listeners
         menuBtn.addEventListener('click', () => playlistDrawer.classList.add('open'));
         closeDrawerBtn.addEventListener('click', () => playlistDrawer.classList.remove('open'));
 
-        // Load API asynchronously 
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -550,12 +540,11 @@
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                // Video aspect ratio handles height and width beautifully via CSS now
                 height: '100%',
                 width: '100%',
                 playerVars: {
                     autoplay: 0,
-                    controls: 1, // Set to 1 so users can tap native fullscreen/controls if needed, or 0 to keep it clean
+                    controls: 1, 
                     disablekb: 0,
                     fs: 1,
                     modestbranding: 1,
@@ -576,19 +565,25 @@
             loadPlaylist(currentPlaylistId);
         }
 
-        // Sync & Reset Interface
         function loadPlaylist(id) {
+            // Sequence counter ko increase karein taki purane playlist requests reject ho sakein
+            currentPlaylistSequenceId++;
+            const thisRequestSequenceId = currentPlaylistSequenceId;
+
             playlistContainer.innerHTML = `
                 <div style="padding: 30px; text-align: center; color: var(--text-sub); font-size: 0.9rem;">
                     <i class="fa-solid fa-circle-notch fa-spin" style="margin-bottom: 10px; display: block; font-size: 1.5rem; color: var(--accent-color);"></i>
                     Syncing tracks...
                 </div>`;
+            
+            title.textContent = "Loading Playlist...";
+            artist.textContent = "Please wait...";
             playlistTracks = [];
             currentTrackIndex = 0;
+            
             player.cuePlaylist({list: id});
         }
 
-        // Dropdown Selection Event Listener
         playlistSelector.addEventListener('change', (e) => {
             const selectedId = e.target.value;
             currentPlaylistId = selectedId;
@@ -605,7 +600,11 @@
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.CUED || event.data === -1) {
                 const playlistIds = player.getPlaylist();
-                if (playlistIds && playlistIds.length > 0 && playlistTracks.length === 0) {
+                
+                // Check karein ki playlist list empty na ho aur current active sequence track match kare
+                if (playlistIds && playlistIds.length > 0) {
+                    
+                    // Nayi playlist structured structure update
                     playlistTracks = playlistIds.map((id, index) => {
                         return {
                             id: id,
@@ -615,9 +614,9 @@
                             index: index
                         };
                     });
-                                        
+                                            
                     buildPlaylistUI();
-                    setTimeout(fetchYouTubeVideoTitles, 500);
+                    fetchYouTubeVideoTitles(currentPlaylistSequenceId);
                 }
             }
                         
@@ -638,8 +637,8 @@
             }
         }
 
-        // Retrieve video title metadata fallback
-        function fetchYouTubeVideoTitles() {
+        // Title metadata API fetch verification link
+        function fetchYouTubeVideoTitles(sequenceId) {
             if (!player || typeof player.getPlaylist !== 'function') return;
             const playlistIds = player.getPlaylist();
             if (!playlistIds) return;
@@ -650,15 +649,20 @@
                     fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${track.id}`)
                         .then(res => res.json())
                         .then(data => {
+                            // Agar user ne request change kar di ho toh data discard kar dein
+                            if (sequenceId !== currentPlaylistSequenceId) return;
+
                             if (data && data.title) {
                                 track.title = data.title;
                                 track.artist = data.author_name || "Unknown Artist";
                                                                 
-                                originalTitleElement.textContent = data.title;
+                                const titleEl = document.getElementById(`li-title-${index}`);
+                                if (titleEl) titleEl.textContent = data.title;
+                                
                                 const artistElement = document.getElementById(`li-artist-${index}`);
                                 if (artistElement) artistElement.textContent = track.artist;
                                                                 
-                                if (index === currentTrackIndex) {
+                                if (index === player.getPlaylistIndex()) {
                                     syncTrackMeta();
                                 }
                             }
@@ -691,6 +695,7 @@
                 playlistContainer.appendChild(item);
             });
             updatePlaylistActiveState();
+            syncTrackMeta();
         }
 
         function updatePlaylistActiveState() {
@@ -705,6 +710,7 @@
         }
 
         function syncTrackMeta() {
+            if (!player || typeof player.getPlaylistIndex !== 'function') return;
             const index = player.getPlaylistIndex();
             if (index === -1 || index === undefined) return;
             currentTrackIndex = index;
@@ -713,6 +719,9 @@
             if (selectedTrack) {
                 title.textContent = selectedTrack.title;
                 artist.textContent = selectedTrack.artist;
+            } else {
+                title.textContent = `Track #${index + 1}`;
+                artist.textContent = "Playing content...";
             }
             updatePlaylistActiveState();
         }
@@ -723,7 +732,6 @@
             updatePlaylistActiveState();
         }
 
-        // Standard Navigation Controls
         playBtn.addEventListener('click', () => {
             if (isPlaying) {
                 player.pauseVideo();
@@ -780,7 +788,6 @@
             return `${mins}:${secs}`;
         }
 
-        // Scrub Progress Bar seeking
         progressContainer.addEventListener('click', (e) => {
             if (!player || typeof player.getDuration !== 'function') return;
                                 
