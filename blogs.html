@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#F5C69C"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+    <link href='https://blogger.googleusercontent.com/img/a/AVvXsEhKsrmpBrne1Zhch4ZYj2hLiBgJa_HlNTRQo3jKOALEPFglBtObjhKfp2a97q2pqU95-I0kg5_6WgBn_-gVaLorTpo4Y7_nGiJP5_4dFZf3ZEtL_yRUoISndobh0WSX1rqcBznHOxH2tK2fGEmcpaLj_McC6GzvjKpDMC8p8UNJGSJ4Z_-5qSjWgniohm6r=s640' rel='icon' type='image/x-icon'/>
+    <link href='https://blogger.googleusercontent.com/img/a/AVvXsEhKsrmpBrne1Zhch4ZYj2hLiBgJa_HlNTRQo3jKOALEPFglBtObjhKfp2a97q2pqU95-I0kg5_6WgBn_-gVaLorTpo4Y7_nGiJP5_4dFZf3ZEtL_yRUoISndobh0WSX1rqcBznHOxH2tK2fGEmcpaLj_McC6GzvjKpDMC8p8UNJGSJ4Z_-5qSjWgniohm6r=s640' rel='shortcut icon' type='image/x-icon'/>    
+    <title>goqos.org</title>
+</head>
+
+<body>
+
+<div class="pro-sitemap-container">
+  <!-- Premium Header with Logo and Menu Icon -->
+  <div class="custom-header">
+    <div class="logo">
+           <a href="https://goqos.org"><img src="https://i.ibb.co/FL96K9Pw/20260519-131632.png" alt="goqos.org" width="170px" border="0"></a>
+    </div><a href="index.html" style='color: var(--text-muted);
+    text-decoration: none;font-size:33px; margin-top:-20px;'>←<font style='font-size:13px;'>back</font></a>
+    <div class="menu-icon" onclick="toggleMenu()">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="3" y1="12" x2="21" y2="12"></line>
+  <line x1="3" y1="6" x2="21" y2="6"></line>
+  <line x1="3" y1="18" x2="21" y2="18"></line>
+</svg>
+
+    </div>
+  </div>
+  
+  <!-- Sliding Sidebar Menu -->
+  <div id="sideMenu" class="side-menu">
+    <div class="menu-header">
+      <h3>All Labels</h3>
+      <button class="close-btn" onclick="toggleMenu()">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <line x1="18" y1="6" x2="6" y2="18" />
+  <line x1="6" y1="6" x2="18" y2="18" />
+</svg>
+      </button>
+    </div>
+    <ul class="menu-links">
+     
+  </ul>
+  </div>
+  
+  <!-- Smooth Overlay -->
+  <div id="overlay" onclick="toggleMenu()"></div>
+  
+  <!-- Sitemap Main Header Area -->
+  <div class="sitemap-header">
+
+    <div class="search-box-wrapper">
+      <span class="search-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="11" cy="11" r="8" />
+  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+</svg>
+      </span>
+      <input type="text" id="sitemap-search" placeholder="Search" onkeyup="searchSitemapPosts()">
+    </div>
+    
+        <h2>Posts <span id="total-posts-count" class="count-badge">...</span></h2>
+  </div>
+
+  <!-- Modern Glassmorphism Spinner Loader -->
+  
+  
+  <div id='scl'>
+  <div id="sitemap-loading" class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
+
+
+
+  <!-- Output Grid Layout -->
+  <div id="sitemap-result-box" class="sitemap-grid" style="display: none;"></div></div>
+</div>
+
+   <div class="background-animation">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="circle c3"></div>
+        <div class="circle c4"></div>
+        <div class="circle c5"></div>
+        <div class="circle c6"></div>
+        <div class="circle c7"></div>
+        <div class="circle c8"></div>
+        <div class="circle c9"></div>
+        <div class="circle c10"></div>
+    </div>
+    
+
+
+
+
+<style>
+           :root {
+            --bg-gradient: linear-gradient(165deg, rgba(245, 131, 31, 0.4) 0%, #efefef 100%);
+            --card-bg: rgba(255, 255, 255, 0.4);
+            --card-border:#ff9800;
+            --accent-color: #ff9800;
+            --accent-hover: #ff5e84;
+            --text-main: #2d3748;
+            --text-sub: #718096;
+            --progress-bg: rgba(0, 0, 0, 0.08);
+            --glass-blur: blur(20px);
+            --shadow-light: 0 15px 35px rgba(31, 38, 135, 0.08);
+        }
+img{pointer-events:none;}
+
+        html {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            height: 100%;
+        }
+
+        *::-webkit-scrollbar {
+            display: none !important;
+            width: 0px !important;
+            height: 0px !important;
+            background: transparent !important;
+        }
+
+        body {border-top:1px solid #FFE0C5;
+            -webkit-tap-highlight-color: transparent;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100%;
+            margin: 0;
+            padding: 27px 20px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+
+
+      .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index:-2;
+        }
+
+        .circle {
+            position: absolute;
+            background:rgba(245, 131, 31, 0.9); 
+            border-radius: 50%; 
+            bottom: -250px;
+            animation: zoomAndFloat 15s infinite linear;
+        }
+
+        .c1 { width: 80px; height: 80px; left: 10%; animation-duration: 10s; }
+        .c2 { width: 120px; height: 120px; left: 25%; animation-delay: 2s; animation-duration: 12s; }
+        .c3 { width: 50px; height: 50px; left: 40%; animation-delay: 4s; animation-duration: 8s; }
+        .c4 { width: 160px; height: 160px; left: 55%; animation-delay: 1s; animation-duration: 18s; }
+        .c5 { width: 90px; height: 90px; left: 70%; animation-delay: 5s; animation-duration: 11s; }
+        .c6 { width: 200px; height: 200px; left: 85%; animation-delay: 3s; animation-duration: 20s; }
+        .c7 { width: 70px; height: 70px; left: 15%; animation-delay: 7s; animation-duration: 9s; }
+        .c8 { width: 110px; height: 110px; left: 45%; animation-delay: 6s; animation-duration: 14s; }
+        .c9 { width: 40px; height: 40px; left: 65%; animation-delay: 9s; animation-duration: 7s; }
+        .c10 { width: 140px; height: 140px; left: 80%; animation-delay: 8s; animation-duration: 16s; }
+
+        @keyframes zoomAndFloat {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+ 
+#scl{background: transparent;            
+position: relative;z-index:999;
+height: 440px; padding:6px 0px;
+    overflow-y: scroll;
+   
+}
+
+  .pro-sitemap-container {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin:0px auto;
+    padding: 32px 20px 20px;
+                background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-top:3px solid var(--card-border)!important;           
+             border: 1px solid var(--card-border);
+    border-radius: 46px 0px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Premium Header Style */
+  .custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .custom-header .logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+  }
+
+  .custom-header .logo-accent {
+    color: var(--primary-color);
+  }
+
+  .custom-header .menu-icon {
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-smooth);
+    background: #FFD1AA;
+  }
+
+  .custom-header .menu-icon:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+
+  /* Side Menu Upgraded */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -320px; 
+    width: 300px;
+    height: 100%;
+  background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+ box-shadow: 10px 0 40px rgba(0,0,0,0.08);
+    padding: 30px 34px;
+    box-sizing: border-box;
+    transition: var(--transition-smooth);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    border-radius:0px 0px 46px 0px;
+  }
+
+  .side-menu.active {
+    left: 0;
+  }
+
+  .menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .menu-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .close-btn {
+    background: #FFD1AA;
+    border: none;
+    color: var(--text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+  }
+
+  .close-btn:hover {
+    background: #fee2e2;
+    color: #ef4444;
+  }
+
+  .menu-links {
+overflow-y: scroll;
+    list-style: none;
+    padding: 0;
+    margin:3px 0 0;
+height: 100%;
+  }
+
+  .menu-links li {
+    margin-bottom:1px;
+  }
+
+.menu-links li:first-child > a {
+Padding :0px 0px 9px 0px; margin ;0;   
+}
+  .menu-links li a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: var(--transition-smooth);
+  }
+
+    .menu-links li a::before{
+content:"⁠◉"; font-size:18px;
+}
+
+  /* Overlay Styling */
+  #overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background:#F5E4D5;
+    opacity:9;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+    z-index: 9998;
+  }
+  #overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Sitemap Section Styling */
+  .sitemap-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .sitemap-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .count-badge {
+    font-size: 14px;
+    background: #e0e7ff;
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  /* Premium Search Box input layout */
+  .search-box-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    display: flex;
+  }
+
+  #sitemap-search {
+    width: 100%;
+    padding: 13px 16px 13px 46px;
+    border-radius: 30px;
+    font-size: 15px;
+    background:rgba(0, 0, 0, 0.04);
+              border: 1px solid rgba(0, 0, 0, 0.09);
+    color: var(--text-main);
+    box-sizing: border-box;
+    transition: var(--transition-smooth);
+  }
+
+  #sitemap-search:focus {
+    outline: none;
+ background:rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--card-border);
+     }
+
+  /* Modern Cards Grid Layout */
+  .sitemap-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 11px;
+  }
+
+  .sitemap-card {
+    background: #ffcf9e;
+background: linear-gradient(90deg, rgba(255, 207, 158, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+               
+    border-radius: 12px;
+    padding:11px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow:;
+    transition: var(--transition-smooth);
+    cursor: pointer; /* POORE BOX PAR CURSOR POINTER LAKHNE KE LIYE */
+  }
+
+  .sitemap-card:hover {
+    transform: translateY(-5px);
+    border-color: #cbd5e1;
+    box-shadow: var(--shadow-lg);
+  }
+
+
+.sitemap-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1;
+    /* New code for single line ellipsis */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+  .sitemap-card h3 a {
+    color: var(--text-main);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+  }
+
+  .sitemap-card h3 a:hover {
+    color: var(--primary-color);
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 1px;
+    font-size: 13px;
+  }
+
+  .post-date {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .post-label {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Modern Animated Loading Spinner */
+  .spinner-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 160px 0;
+    color: var(--text-muted);
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3.5px solid #e2e8f0;
+    border-top: 3.5px solid #F5C69C;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
+</style>
+
+<script type="text/javascript">
+  const blogUrl = "https://xuroni.blogspot.com"; 
+
+  function toggleMenu() {
+    const menu = document.getElementById("sideMenu");
+    const overlay = document.getElementById("overlay");
+    menu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  }
+
+  function loadPremiumSitemap(json) {
+    const entries = json.feed.entry || [];
+    const totalPosts = entries.length;
+    
+    // Total Count Badge update 
+    document.getElementById("total-posts-count").innerText = totalPosts;
+// Auto Load All Labels in Side Menu
+let labels = [];
+let labelHtml = "";
+
+for (let i = 0; i < entries.length; i++) {
+  if (entries[i].category) {
+    entries[i].category.forEach(function(cat) {
+      if (!labels.includes(cat.term)) {
+        labels.push(cat.term);
+      }
+    });
+  }
+}
+
+labels.sort();
+
+for (let i = 0; i < labels.length; i++) {
+  labelHtml += `
+    <li>
+      <a href="${blogUrl}/search/label/${encodeURIComponent(labels[i])}">
+       
+        ${labels[i]}
+      </a>
+    </li>
+  `;
+}
+
+document.querySelector(".menu-links").innerHTML = labelHtml;
+    
+    let htmlCode = "";
+    
+    for (let i = 0; i < totalPosts; i++) {
+      const entry = entries[i];
+      const title = entry.title.$t;
+      
+      let url = "";
+      for (let j = 0; j < entry.link.length; j++) {
+        if (entry.link[j].rel === "alternate") {
+          url = entry.link[j].href;
+          break;
+        }
+      }
+      
+      const rawDate = entry.published.$t; 
+      const dateObj = new Date(rawDate);
+      const options = { year: 'numeric', month: 'short', day: 'numeric' };
+      const formattedDate = dateObj.toLocaleDateString('en-US', options);
+      
+      let firstLabel = "General";
+      if (entry.category && entry.category.length > 0) {
+        firstLabel = entry.category[0].term;
+      }
+      
+      // LOGIC: Shuruat me sirf pehle 10 posts ko display karega (i < 10) baki sab hide (display: none) rahenge
+      const initialDisplay = (i < 5) ? "flex" : "none";
+      
+      // CHANGES MADE HERE: added onclick event on .sitemap-card div
+      htmlCode += `
+        <div class="sitemap-card" data-title="${title.toLowerCase()}" style="display: ${initialDisplay};" onclick="window.open('${url}', '_blank');">
+          <h3><a href="${url}" target="_blank" title="${title}" onclick="event.stopPropagation();">${title}</a></h3>
+          <div class="card-meta">
+            <span class="post-date">${formattedDate}</span>
+            <span class="post-label" title="Category: ${firstLabel}">${firstLabel}</span>
+          </div>
+        </div>
+      `;
+    }
+    
+    document.getElementById("sitemap-loading").style.display = "none";
+    const resultBox = document.getElementById("sitemap-result-box");
+    resultBox.innerHTML = htmlCode;
+    resultBox.style.display = "grid";
+  }
+
+  // Upgraded Live Search Logic
+  function searchSitemapPosts() {
+    const query = document.getElementById("sitemap-search").value.toLowerCase().trim();
+    const cards = document.getElementsByClassName("sitemap-card");
+    
+    for (let i = 0; i < cards.length; i++) {
+      if (query === "") {
+        // Agar search box khali hai, toh wapas sirf top 10 posts dikhao
+        cards[i].style.display = (i < 5) ? "flex" : "none";
+      } else {
+        // Agar kuch search ho rha hai, toh pure database (sare posts) me se filter karo
+        const postTitle = cards[i].getAttribute("data-title");
+        if (postTitle.includes(query)) {
+          cards[i].style.display = "flex";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
+<script src="https://goqos.blogspot.com/feeds/posts/summary?alt=json-in-script&max-results=9999&callback=loadPremiumSitemap"></script>
+<body>
+</html>
